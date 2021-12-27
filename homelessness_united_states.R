@@ -3,7 +3,6 @@
 # Autora: Jeanne Franco --------------------------------------------------------------------------------------------------------------------
 # Data: 26/12/21 ---------------------------------------------------------------------------------------------------------------------------
 
-
 # Sobre o conjunto de dados ----------------------------------------------------------------------------------------------------------------
 
 # Os dados foram coletados através da contagem de pessoas (point-in-time) que estão dormindo
@@ -23,7 +22,27 @@
 # Carregar dados ---------------------------------------------------------------------------------------------------------------------------
 
 dados <- read.csv2("homeless-per-capita-us.csv", header = T, dec = ".", sep = ",")
-View(dados)
+View(dados) # Visualização dos dados em nova janela do R
 
 library(tibble) # Pacote para acessar a função glimpse
 glimpse(dados) # Função que apresenta o resumo dos dados
+
+# Manipulação dos dados --------------------------------------------------------------------------------------------------------------------
+
+library(dplyr) # Pacote para manipular e apresentar a descrição dos dados
+
+## Renomeando nomes de colunas
+
+d <- dados %>%
+  rename(desabrigados = Unsheltered.Homeless..HUD..2016..and.U.S..Census.Bureau..2010..,
+         abrigados = Sheltered.Homeless..HUD..2016..and.U.S..Census.Bureau..2010.. ,
+         ano = Year)
+d
+
+## Selecionando dados para análise
+
+d1 <- d %>%
+  select(ano, abrigados, desabrigados)
+d1
+
+view(d1) # Visualizar nova tabela de dados
