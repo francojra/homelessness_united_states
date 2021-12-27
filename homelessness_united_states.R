@@ -42,7 +42,32 @@ d
 ## Selecionando dados para análise
 
 d1 <- d %>%
-  select(ano, abrigados, desabrigados)
+  select(Code, ano, abrigados, desabrigados)
 d1
 
 view(d1) # Visualizar nova tabela de dados
+
+# Gráfico ----------------------------------------------------------------------------------------------------------------------------------
+
+library(ggplot2) # Pacote para fazer o gráfico
+
+g1 <- ggplot(d1, aes(x = ano, y = abrigados, group = Code)) +
+  geom_line(size = 1.4) +
+  geom_point(size = 2) +
+  labs(x = "Anos", y = "Número de moradores de rua abrigados",
+       title = "Homelessness - Estados Unidos") +
+  theme_bw(base_size = 15)
+
+g2 <- ggplot(d1, aes(x = ano, y = desabrigados, group = Code)) +
+  geom_line(size = 1.4) +
+  geom_point(size = 2) +
+  labs(x = "Anos", y = "Número de moradores de rua desabrigados",
+       title = "") +
+  theme_bw(base_size = 15)
+
+library(cowplot) # Pacote para unir gráficos em janela única
+plot_grid(g1, g2, labels = c("A", "B"), ncol = 2, nrow = 1)
+
+# Referência -------------------------------------------------------------------------------------------------------------------------------
+
+# https://ourworldindata.org/homelessness
