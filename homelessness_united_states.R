@@ -7,3 +7,6 @@
 
 dados <- read.csv2("homeless-per-capita-us.csv", header = T, dec = ".", sep = ",")
 View(dados)
+
+library(tibble) # Pacote para acessar a função glimpse
+glimpse(dados) # Função que apresenta o resumo dos dados
